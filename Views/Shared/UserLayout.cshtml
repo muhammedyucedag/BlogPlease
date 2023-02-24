@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<title>@ViewData["Title"] - Blog Please</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="keywords" content="Weblog a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<link href="~/webTema/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="~/webTema/css/single.css">
+	<link href="~/webTema/css/style.css" rel='stylesheet' type='text/css' />
+	<link href="~/webTema/css/fontawesome-all.css" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+		  rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="~/webwriter/assets/images/comments-regular.svg">
+</head>
+
+<body>
+	<!--Header-->
+
+	<header>
+		<div class="top-bar_sub_w3layouts container-fluid">
+			<div class="row">
+				<div class="col-md-4 logo text-left">
+					<a class="navbar-brand brand-logo" href="../../index.html"><img src="~/webTema/images/logo-1.jpg" alt="logo" style="height: 46px;width: 197px;margin-bottom: 5px;" /></a>
+				</div>
+				@await Html.PartialAsync("Partial2")
+				<div class="col-md-4 log-icons text-right">
+
+					<ul class="social_list1 mt-3">
+
+						<li>
+							<a href="#" class="facebook1 mx-2">
+								<i class="fab fa-facebook-f"></i>
+
+							</a>
+						</li>
+						<li>
+							<a href="#" class="twitter2">
+								<i class="fab fa-twitter"></i>
+
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dribble3 mx-2">
+								<i class="fab fa-dribbble"></i>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="pin">
+								<i class="fab fa-pinterest-p"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		@await Html.PartialAsync("NavbarPartial")
+
+	</header>
+
+	@RenderBody()
+
+	<!--//main-->
+	<!--footer-->
+	@await Html.PartialAsync("Partial3")
+	<!-- js -->
+	<script src="~/webTema/js/jquery-2.2.3.min.js"></script>
+	<!-- //js -->
+	<!--/ start-smoth-scrolling -->
+	<script src="~/webTema/js/move-top.js"></script>
+	<script src="~/webTema/js/easing.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	<!-- //Custom-JavaScript-File-Links -->
+	<script src="~/webTema/js/bootstrap.js"></script>
+
+</body>
+
+</html>
+

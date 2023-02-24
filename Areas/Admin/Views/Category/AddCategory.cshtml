@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Yeni Kategori Girişi</h1>
+
+@using (Html.BeginForm("AddCategory", "Category", FormMethod.Post))
+{
+    @Html.Label("Kategori Adı")
+    @Html.TextBoxFor(x=>x.CategoryName,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.CategoryName)
+    <br />
+    @Html.Label("Kategori Açıklaması")
+    @Html.TextAreaFor(x=>x.CategoryDescription,15,3, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.CategoryDescription)
+    <br />
+
+    @Html.Label("Kategori Durumu (Aktif/Pasif)")
+    @Html.CheckBox("CategoryStatus",true,new{@class="checkmark"})
+
+    @*@Html.CheckBoxFor(x=>x.CategoryStatus)*@
+    
+
+    <br />
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a href="/Admin/Category" class="btn btn-dark" id="btnCategoryList">Listeye Dön</a>
+}
+<br />
+
+
+
+<style>
+
+    .checkmark{
+        position: absolute;
+        height: 20px;
+        margin-left:1%;
+        width: 15px;
+        background-color: #eee;
+    }
+</style>
+
+

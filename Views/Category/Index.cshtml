@@ -1,0 +1,28 @@
+﻿@model List<Category>
+
+
+@{
+    Layout = null;
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Kategori Adı</th>
+        <th>Durumu</th>
+        <th>Detaylar</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryId</td>
+            <td>@item.CategoryName</td>
+            <td>@item.CategoryStatus</td>
+            <td><a href="#" class="btn btn-warning btn-sm"><i class="fa fa-circle-info me-2"></i>Detaylar</a></td>
+            <td><a href="#" class="btn btn-Danger btn-sm"><i class="fa fa-trash me-2"></i>Notu Sil</a></td>
+        </tr>
+    }
+</table>

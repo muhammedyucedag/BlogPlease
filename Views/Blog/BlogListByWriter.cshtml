@@ -1,0 +1,110 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+
+<h1>Yazar Blog Listesi</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Blog Başlığı</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Kategori</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogId</th>
+            <td>@item.BlogTitle</td>
+            <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MM-yyyy"))</td>
+            <td>@item.Category.CategoryName</td>
+            <td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">Pasif</span>
+                }
+            </td>
+            <td>
+                <button data-delete="@item.BlogId" title="Sil" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+            <td><a href="/blog/editblog/@item.BlogId" editbtn title="Düzenle" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square text-dark"></i></a></td>
+        </tr>
+
+    }
+</table>
+
+@*Javascript'de Selectorler
+    örn: <a id="burasi" class="boyle" href=""></a>
+    #bursi = id
+    [href] = attribute
+    .boyle = class
+    a = element*@
+
+<script>
+    $(document).ready(function () {
+
+        //$('[editbtn]').click(function (event){
+        //    event.preventDefault(); // Sayfa yenilenmesni engeller
+        //    console.log('Selam Ege')
+        //})
+
+        $('[data-delete]').click(function (event) {
+            event.preventDefault(); // Sayfa yenilenmesni engeller
+
+            const buttonElement = $(this)
+
+            swal({
+
+                title: "Silinsin mi",
+                icon: "info",
+                buttons: true,
+                dangerMode: true
+
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        method: "get",
+                        url: '/blog/deleteblog/' + buttonElement.data('delete'),
+
+                    }).done(function (result) {
+                        buttonElement.parent().parent().remove()
+
+                    }).fail(function () {
+                        swal({
+                            title: "Silme işlemi başarısız.",
+                            icon: "danger",
+                            button: "OK",
+                        });
+
+                    })
+                }
+            })
+
+
+        })
+
+    })
+</script>
+
+<a href="/blog/blogadd" class="btn btn-primary">Yeni Blog Oluştur</a>

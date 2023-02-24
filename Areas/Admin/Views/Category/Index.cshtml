@@ -1,0 +1,123 @@
+﻿@using EntityLayer.Concrete
+@using X.PagedList @*sayfalama işlemi*@
+@using X.PagedList.Mvc.Core
+@model IPagedList<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<link href="~/inspinia-gh-pages/css/switch.css" rel="stylesheet" />
+
+<br />
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>#</th>
+        <th>Kategori Adı</th>
+        <th>Aktif / Pasif</th>
+        <th>Düzenle</th>
+    </tr>
+
+    @{
+        int sıra = 0;
+    }
+
+    @foreach (var item in Model)
+    {
+        sıra++;
+        <tr>
+            <td>@item.CategoryId</td>
+            <td>@item.CategoryName</td>
+            <td>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" data-switch="@item.CategoryId" @(item.CategoryStatus ? "checked" : "")>
+            </div>
+            </td>
+            @*<input type="checkbox" name="CategoryStatus" value="true"/>*@
+            @*<td class="">
+        <i class="fa fa-@(item.CategoryStatus ? "check text-success" : "times text-danger")"></i>
+        </td>*@
+            <td><a href="#" class="btn btn-success">Düzenle</a></td>
+        </tr>
+    }
+</table>
+<a href="/admin/category/addcategory/" class="btn btn-primary">Yeni Kategori</a>
+<br />
+<br />
+
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page})) @*sayfalama işlemi*@
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-switch]').change(function (event) {
+            let CategoryId = $(this).data("switch")
+            let isChecked = $(this).is(':checked')
+            const postData = {
+                id: CategoryId,
+                status: isChecked
+            }
+            $.ajax({
+                method: "post",
+                url: '/Admin/Category/editCategory/',
+                data: postData
+            }).done( function(e){
+
+                swal({
+
+                    title: e,
+                    icon: "success",
+
+                })
+
+            } )
+        })
+
+    })
+</script>
+
+@*ÇÖZEMEDİĞİM ALAN BURASI *@
+
+@*<script>
+    $(document).ready(function () {
+        $('[data-passive]').click(function (event) {
+            event.preventDefault(); // Sayfa yenilenmesni engeller
+
+            const buttonElement = $(this)
+
+            swal({
+
+                title: "Pasif Bırakılsın mı?",
+                icon: "info",
+                buttons: true,
+                dangerMode: true
+
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        method: "get",
+                        url: 'Admin/Category/CategoryDelete/' + buttonElement.data('delete'),
+
+                    }).done(function (result) {
+                        buttonElement.parent().remove()
+
+                    }).fail(function () {
+                        swal({
+                            title: "işlemi başarısız.",
+                            icon: "info",
+                            button: "OK",
+                        });
+
+                    })
+                }
+            })
+        })
+
+    })
+</script>*@

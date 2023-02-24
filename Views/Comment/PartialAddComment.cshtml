@@ -1,0 +1,41 @@
+﻿<div class="comment-top">
+    <h4>Bir yorum bırakın</h4>
+    <div class="comment-bottom">
+        <form method="post" asp-action="PartialAddComment" asp-controller="Comment">
+            <input class="form-control" type="text" id="CommentUserName" name="CommentUserName" placeholder="Adınız Soyadınız" required="">
+
+            <input class="form-control" type="text" id="CommentTitle" name="CommentTitle" placeholder="konu" required="">
+
+            <textarea class="form-control" id="CommentContent" name="CommentContent" placeholder="Yorumunuz..." required=""></textarea>
+
+            <button type="button" onclick="sendComment()" class="btn btn-primary submit">Yorum yap</button>
+        </form>
+    </div>
+</div>
+<script>
+    function sendComment() {
+        var nameAndSurname = $("#CommentUserName").val();
+        var commentTitle = $("#CommentTitle").val();
+        var comment = $("#CommentContent").val();
+
+        $.ajax({
+            method: "post",
+            url: "/Comment/PartialAddComment/",
+            data: {
+                CommentUserName: nameAndSurname,
+                CommentTitle: commentTitle,
+                CommentContent: comment
+            }
+        }).done(function (result) {
+            if (result.hasError != undefined && result.hasError) {
+                alert("Yorumunuz eklenmedi. Bir hata oluştu");
+            }
+            location.reload();
+        }).fail(function () {
+
+            alert("Yorumunuz eklenmedi. Bir hata oluştu");
+
+        })
+    }
+
+</script>
