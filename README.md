@@ -9,3 +9,14 @@ Uygulama, blog yazarlarının kendilerini ifade etmelerine ve okuyucularıyla et
 Ayrıca, farklı kategorilerdeki blogları takip ederek, kullanıcılar farklı konular hakkında da bilgi sahibi olabilirler.
 Blog Web Sitesi, kişisel bloglar için ideal bir platformdur. Ayrıca, işletmelerin de pazarlama stratejileri için kullanabilecekleri bir platformdur. 
 Kullanıcılar, bloglarına bağlı bir kitle oluşturarak, farkındalık yaratabilirler ve potansiyel müşterilerine erişebilirler.
+
+# Kullandığım Teknolojiler
+Asp.Net Core 6.0
+Entity Framework
+MsSql
+JavaScript
+Html
+Css
+
+# Projemde Kullandığım api
+[Hava Durum Apisi](https://openweathermap.org/api)
